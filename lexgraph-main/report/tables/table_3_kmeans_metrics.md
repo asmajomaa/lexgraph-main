@@ -1,0 +1,13 @@
+# K-Means clustering quality (k=20, seeded with k-means++)
+
+| metric | value |
+|---|---|
+| purity | 0.3141 |
+| NMI | 0.3078 |
+| ARI | 0.1081 |
+| documents | 18719 |
+| clusters (k) | 20 |
+| true classes | 20 |
+| iterations | 60 |
+| final inertia | 17888.09 |
+| largest cluster | 24.3% |

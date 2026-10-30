@@ -1,0 +1,11 @@
+[BUILD] load corpora (18719 news / 3890 cases)   16.13s
+[BUILD] news index (112184 terms)       8.57s
+[BUILD] legal index (94185 terms)      48.54s
+[BUILD] citation graph (3890/3077 V/E)    0.51s
+[BUILD] tf-idf vocabulary (5000)       13.94s
+[BUILD] vectorise corpus               11.54s
+[BUILD] k-means (k=20, iters=60, max_iter)   93.74s
+[BUILD] total                         193.00s  (0 edges with unknown endpoints skipped)
+[BUILD] written to cache/engine.pkl in 197.76s
+[BUILD] news: 18719 docs / 112184 terms | legal: 3890 cases / 3077 edges
+[BUILD] k-means: k=20 iters=60 inertia=17888.09 purity-vs-labels is reported by benchmarks

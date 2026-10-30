@@ -1,0 +1,24 @@
+Hash-table collisions: lifetime counter vs final-table shape
+========================================================================
+
+A resize re-inserts every live entry, so a lifetime counter counts the
+same keys again. 'chain_collisions' is size - non-empty buckets in the
+final table and is the number to compare with uniform hashing.
+
+newsgroups: 112184 distinct terms, 262144 buckets, load 0.4279
+  final-table collisions (size - non-empty buckets) : 21912
+  uniform-hashing prediction n - C(1 - e^(-n/C))    : 20917
+  ratio measured / predicted                        : 1.048
+  longest chain                                     : 6
+  mean chain over ALL buckets                       : 0.4279
+  lifetime counter after a put()-by-put() build     : 83222
+  lifetime counter after one bulk_put() load        : 21912
+
+legal: 94185 distinct terms, 131072 buckets, load 0.7186
+  final-table collisions (size - non-empty buckets) : 27302
+  uniform-hashing prediction n - C(1 - e^(-n/C))    : 27004
+  ratio measured / predicted                        : 1.011
+  longest chain                                     : 7
+  mean chain over ALL buckets                       : 0.7186
+  lifetime counter after a put()-by-put() build     : 58250
+  lifetime counter after one bulk_put() load        : 27302

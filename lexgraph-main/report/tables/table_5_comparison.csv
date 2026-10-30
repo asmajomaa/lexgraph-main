@@ -1,0 +1,5 @@
+component,mine,reference,ratio,note
+hash table insert,1850.65 ms,13.56 ms,136.4x,"150000 keys, load 0.57, 35863 final-table collisions (94238 over the whole build)"
+hash table lookup,433.01 ms,31.51 ms,13.7x,150000 lookups
+hash memory,13825 KiB,7681 KiB,1.80x,peak via tracemalloc
+top-K heap,66.96 ms,16.16 ms,4.1x,"k=10, identical scores: True"

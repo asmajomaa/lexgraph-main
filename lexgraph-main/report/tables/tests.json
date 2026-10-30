@@ -1,0 +1,1456 @@
+{
+  "passed": 232,
+  "failed": 0,
+  "skipped": 0,
+  "total": 232,
+  "duration_s": 3.63,
+  "collected_at": "2026-10-28 18:18:27",
+  "exit_code": 0,
+  "modules": {
+    "test_agent": {
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_bm25": {
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_graph": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_hash_table": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_min_heap": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_ml": {
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_purity": {
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_sparse_vector": {
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_style": {
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0
+    },
+    "test_tokenizer": {
+      "passed": 27,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "tests": [
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_keywords_route_to_graph[which cases cite 06_1]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_keywords_route_to_graph[what references the Sharman case]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_keywords_route_to_graph[cases that followed the precedent]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_keywords_route_to_graph[show me the citing articles]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_keywords_route_to_graph[is it distinguished by later courts]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_keywords_route_to_graph[applied in a later ruling]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_lexical_queries_do_not_route_to_graph[hockey playoffs goalie]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_lexical_queries_do_not_route_to_graph[opengl texture mapping]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_lexical_queries_do_not_route_to_graph[excited about the new engine]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_lexical_queries_do_not_route_to_graph[the precedence of operators]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_lexical_queries_do_not_route_to_graph[recently updated drivers]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_lexical_queries_do_not_route_to_graph[orbit launch window]",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_reason_emits_structured_log",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_baseline_run_returns_ranked_rows",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_ml_run_prunes_candidates",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_ml_run_with_compare_reports_overlap",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_run_uses_seed_and_traversal",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_falls_back_to_bm25_top1",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_relational_with_no_matches_reports_honestly",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_answer_text_is_present",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_empty_match_answer_is_honest",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_result_serialises_to_dict",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_agent.py",
+      "name": "test_depth_limited_bfs_returns_seed_only",
+      "status": "PASSED",
+      "module": "test_agent"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_index_statistics",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_index_rejects_non_dense_ids",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_bm25_hand_computed_three_documents",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_bm25_explain_matches_score",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_idf_decreases_with_document_frequency",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_length_normalisation_discounts_long_documents",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_b_parameter_zero_disables_length_normalisation",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_empty_query_and_unknown_terms",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_k_larger_than_results",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_top_k_ordering_and_limit",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_restricted_view_filters_candidates",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_cluster_filter_membership",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_candidate_set_membership_and_ids",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_index_round_trips_through_state",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_bm25.py",
+      "name": "test_stats_reporting_after_search",
+      "status": "PASSED",
+      "module": "test_bm25"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_add_node_and_edge_counts",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_neighbors_direction_and_filter",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_depth_limited",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_records_parent_and_edge_type",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_handles_cycles_and_visits_once",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_disconnected_yields_only_seed",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_unknown_start_returns_empty",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_reverse_direction_finds_citing_cases",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_edge_type_filter_prunes_frontier",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_shortest_path",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_connected_component_size_weak_and_directed",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_depth_profile_is_cumulative",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_order_is_deterministic",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_edge_type_counts_sorted",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_edge_type_filter_reaches_the_agent",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_graph.py",
+      "name": "test_bfs_honours_the_edge_filter",
+      "status": "PASSED",
+      "module": "test_graph"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_polynomial_hash_is_deterministic_and_bounded",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_polynomial_hash_matches_horner_evaluation",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_polynomial_hash_distinguishes_anagrams",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_put_get_contains_delete",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_resize_preserves_entries_and_keeps_load_factor_bounded",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_property_against_builtin_dict",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_keys_and_items_match_dict_after_churn",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_keyerror_on_missing_subscript",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_bulk_put_sizes_once",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_collision_counter_is_recorded",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_chain_collisions_matches_uniform_prediction",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_lifetime_counter_exceeds_final_table_collisions_after_resizes",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_chain_collisions_is_zero_without_collisions",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_hash_table.py",
+      "name": "test_postings_table_adds_and_reads",
+      "status": "PASSED",
+      "module": "test_hash_table"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_push_pop_order_matches_heapq_min_ordering",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_heapq_cross_check_scores_with_ties",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_peek_is_root_and_len_tracks",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_top_k_matches_full_sort[1]",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_top_k_matches_full_sort[3]",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_top_k_matches_full_sort[10]",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_top_k_matches_full_sort[50]",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_tie_break_prefers_lower_doc_id",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_top_k_never_exceeds_capacity_and_counts_rejections",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_top_k_rejects_when_full_and_worse",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_invalid_k_rejected",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_min_heap.py",
+      "name": "test_zero_and_negative_scores_are_ranked",
+      "status": "PASSED",
+      "module": "test_min_heap"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_vectorizer_fits_and_normalises",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_vectorizer_respects_min_df_and_vocab_cap",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_vectorizer_unknown_text_yields_zero_vector",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_vectorizer_round_trips_through_state",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_vectorizer_uses_shared_tokenizer",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_recovers_separated_blobs",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_is_deterministic_for_a_seed",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_inertia_is_non_increasing",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_empty_cluster_is_reseeded",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_predict_and_top_n",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_k_larger_than_corpus",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_rejects_empty_corpus",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_rejects_bad_k",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_kmeans_cluster_members_and_round_trip",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_purity_perfect_and_impure",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_nmi_matches_closed_form_for_identical_partitions",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_ari_known_values",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_nmi_and_ari_match_sklearn",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_evaluate_clustering_shape_and_confusion_matrix",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_ml.py",
+      "name": "test_length_mismatch_is_rejected",
+      "status": "PASSED",
+      "module": "test_ml"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[__init__.py0]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[graph.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[hash_table.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[min_heap.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[sparse_vector.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[__init__.py1]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[agent.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[bm25.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[inverted_index.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[tokenizer.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[__init__.py2]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[evaluation.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[kmeans.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_no_forbidden_library[vectorizer.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[__init__.py0]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[graph.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[hash_table.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[min_heap.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[sparse_vector.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[__init__.py1]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[agent.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[bm25.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[inverted_index.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[tokenizer.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[__init__.py2]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[evaluation.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[kmeans.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_core_imports_only_stdlib_and_siblings[vectorizer.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_inverted_index_uses_the_custom_table",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_graph_adjacency_uses_the_custom_table",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_top_k_heap_matches_full_sort",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[__init__.py0]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[graph.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[hash_table.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[min_heap.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[sparse_vector.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[__init__.py1]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[agent.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[bm25.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[inverted_index.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[tokenizer.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[__init__.py2]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[evaluation.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[kmeans.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_no_dict_or_set_lookup_tables_in_engine[vectorizer.py]",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_vectorizer_vocabulary_is_the_custom_table",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_tokenizer_stop_words_use_no_lookup_table",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_bm25_query_tables_are_the_custom_table",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_evaluation_contingency_table_is_the_custom_table",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_purity.py",
+      "name": "test_agent_cluster_map_is_the_custom_table",
+      "status": "PASSED",
+      "module": "test_purity"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_validation",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_from_pairs_sorts_and_merges",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_dot_matches_dense",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_norm_and_cosine_match_dense",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_add_and_scale_match_dense",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_add_cancellation_drops_coordinate",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_squared_distance_matches_dense",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_normalised_distance_equals_cosine_identity",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_dot_dense_matches_sparse",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_zero_vector_cosine_is_zero",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_sparse_vector.py",
+      "name": "test_norm_is_cached",
+      "status": "PASSED",
+      "module": "test_sparse_vector"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[__init__.py0]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[graph.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[hash_table.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[min_heap.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[sparse_vector.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[__init__.py1]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[agent.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[bm25.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[inverted_index.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[tokenizer.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[__init__.py2]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[evaluation.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[kmeans.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[vectorizer.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[__init__.py3]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[documents.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[load_legal_cases.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[load_newsgroups.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[synthetic.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[__init__.py4]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[bench_graph.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[bench_kmeans.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[bench_query_time.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[bench_scalability.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[common.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[compare_existing.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[run_all.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[__init__.py5]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[run_tests.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[screenshot.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[server.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[__init__.py6]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[conftest.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_agent.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_bm25.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_graph.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_hash_table.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_min_heap.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_ml.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_purity.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_sparse_vector.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_style.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_lines_are_within_the_declared_limit[test_tokenizer.py]",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_style.py",
+      "name": "test_the_limit_is_declared_in_pyproject",
+      "status": "PASSED",
+      "module": "test_style"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_basic_tokenisation_lowercases_and_splits",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_punctuation_and_apostrophes",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stop_words_removed_and_kept_on_request",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_min_length",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_digits_and_alphanumerics_survive",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_empty_and_whitespace",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_unicode_letters_are_not_tokens",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[running-run]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[rendering-render]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[writing-write]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[hopped-hop]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[studies-study]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[policies-policy]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[classes-class]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[news-news]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[references-reference]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[distinguished-distinguish]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[applied-apply]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[followed-follow]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[sses-ss]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer[glasses-glass]",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer_leaves_short_words_alone",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer_leaves_non_alpha_alone",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stemmer_is_idempotent_for_test_vocabulary",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_tokenizer_object_matches_function",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_term_frequencies_preserve_first_seen_order",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    },
+    {
+      "file": "tests/test_tokenizer.py",
+      "name": "test_stop_word_table_has_no_duplicates",
+      "status": "PASSED",
+      "module": "test_tokenizer"
+    }
+  ],
+  "tail": "tests/test_tokenizer.py::test_stop_word_table_has_no_duplicates PASSED   [100%]\n\n============================= 232 passed in 2.03s ============================="
+}

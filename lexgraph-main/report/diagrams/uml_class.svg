@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="660" viewBox="0 0 980 660" font-family="Segoe UI, system-ui, sans-serif">
+<title>LEXGRAPH-RAG class diagram</title>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#5d6b7a"/>
+</marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="30" font-size="16" font-weight="700" fill="#1b2430">LEXGRAPH-RAG: class structure</text>
+<rect x="24" y="60" width="220" height="86" rx="4" fill="#ffffff" stroke="#4b4acf" stroke-width="1.3"/>
+<rect x="24" y="60" width="220" height="24" rx="4" fill="#4b4acf"/>
+<text x="32" y="76" font-size="11.5" font-weight="700" fill="#ffffff">HashSetTable</text>
+<text x="32" y="100" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">put/get/contains/delete</text>
+<text x="32" y="114" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">keys, load_factor</text>
+<text x="32" y="128" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">collisions, chain_collisions</text>
+<text x="32" y="142" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">polynomial hash, chaining</text>
+<rect x="24" y="170" width="220" height="72" rx="4" fill="#ffffff" stroke="#4b4acf" stroke-width="1.3"/>
+<rect x="24" y="170" width="220" height="24" rx="4" fill="#4b4acf"/>
+<text x="32" y="186" font-size="11.5" font-weight="700" fill="#ffffff">PostingsTable</text>
+<text x="32" y="210" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">add_posting(term,id,tf)</text>
+<text x="32" y="224" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">get_postings(term)</text>
+<text x="32" y="238" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">document_frequency(term)</text>
+<rect x="24" y="280" width="220" height="72" rx="4" fill="#ffffff" stroke="#4b4acf" stroke-width="1.3"/>
+<rect x="24" y="280" width="220" height="24" rx="4" fill="#4b4acf"/>
+<text x="32" y="296" font-size="11.5" font-weight="700" fill="#ffffff">MinHeap / TopKHeap</text>
+<text x="32" y="320" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">push / pop / peek</text>
+<text x="32" y="334" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">get_top_k()</text>
+<text x="32" y="348" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">bounded at size k</text>
+<rect x="24" y="400" width="220" height="72" rx="4" fill="#ffffff" stroke="#4b4acf" stroke-width="1.3"/>
+<rect x="24" y="400" width="220" height="24" rx="4" fill="#4b4acf"/>
+<text x="32" y="416" font-size="11.5" font-weight="700" fill="#ffffff">CitationGraph</text>
+<text x="32" y="440" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">add_edge(u,v,type)</text>
+<text x="32" y="454" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">neighbors(node,dir,type)</text>
+<text x="32" y="468" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">bfs_traverse / shortest_path</text>
+<rect x="24" y="528" width="220" height="72" rx="4" fill="#ffffff" stroke="#4b4acf" stroke-width="1.3"/>
+<rect x="24" y="528" width="220" height="24" rx="4" fill="#4b4acf"/>
+<text x="32" y="544" font-size="11.5" font-weight="700" fill="#ffffff">SparseVector</text>
+<text x="32" y="568" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">indices, values (sorted)</text>
+<text x="32" y="582" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">dot / cosine / add / scale</text>
+<text x="32" y="596" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">squared_distance</text>
+<rect x="390" y="60" width="230" height="86" rx="4" fill="#ffffff" stroke="#0f6b6b" stroke-width="1.3"/>
+<rect x="390" y="60" width="230" height="24" rx="4" fill="#0f6b6b"/>
+<text x="398" y="76" font-size="11.5" font-weight="700" fill="#ffffff">InvertedIndex</text>
+<text x="398" y="100" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">postings: PostingsTable</text>
+<text x="398" y="114" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">doc_lengths, N, avgdl</text>
+<text x="398" y="128" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">add_document(doc)</text>
+<text x="398" y="142" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">restrict(candidates)</text>
+<rect x="390" y="186" width="230" height="72" rx="4" fill="#ffffff" stroke="#0f6b6b" stroke-width="1.3"/>
+<rect x="390" y="186" width="230" height="24" rx="4" fill="#0f6b6b"/>
+<text x="398" y="202" font-size="11.5" font-weight="700" fill="#ffffff">Tokenizer</text>
+<text x="398" y="226" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">tokenize(text)</text>
+<text x="398" y="240" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">stop words + Porter-1</text>
+<text x="398" y="254" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">min_length</text>
+<rect x="390" y="290" width="230" height="72" rx="4" fill="#ffffff" stroke="#0f6b6b" stroke-width="1.3"/>
+<rect x="390" y="290" width="230" height="24" rx="4" fill="#0f6b6b"/>
+<text x="398" y="306" font-size="11.5" font-weight="700" fill="#ffffff">BM25</text>
+<text x="398" y="330" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">idf(df, N)</text>
+<text x="398" y="344" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">search(query, k)</text>
+<text x="398" y="358" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">score_document / explain</text>
+<rect x="390" y="410" width="230" height="72" rx="4" fill="#ffffff" stroke="#0f6b6b" stroke-width="1.3"/>
+<rect x="390" y="410" width="230" height="24" rx="4" fill="#0f6b6b"/>
+<text x="398" y="426" font-size="11.5" font-weight="700" fill="#ffffff">TFIDFVectorizer</text>
+<text x="398" y="450" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">fit(documents)</text>
+<text x="398" y="464" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">transform_text(text)</text>
+<text x="398" y="478" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">vocabulary, idf</text>
+<rect x="390" y="528" width="230" height="72" rx="4" fill="#ffffff" stroke="#0f6b6b" stroke-width="1.3"/>
+<rect x="390" y="528" width="230" height="24" rx="4" fill="#0f6b6b"/>
+<text x="398" y="544" font-size="11.5" font-weight="700" fill="#ffffff">KMeans</text>
+<text x="398" y="568" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">fit / predict / predict_top_n</text>
+<text x="398" y="582" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">centroids, labels, inertia</text>
+<text x="398" y="596" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">k-means++ seeding</text>
+<rect x="730" y="150" width="226" height="86" rx="4" fill="#ffffff" stroke="#b7791f" stroke-width="1.3"/>
+<rect x="730" y="150" width="226" height="24" rx="4" fill="#b7791f"/>
+<text x="738" y="166" font-size="11.5" font-weight="700" fill="#ffffff">ReActAgent</text>
+<text x="738" y="190" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">reason(query, mode)</text>
+<text x="738" y="204" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">act(...) -> path</text>
+<text x="738" y="218" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">observe(path, payload, k)</text>
+<text x="738" y="232" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">run(...) -> AgentResult</text>
+<rect x="730" y="300" width="226" height="72" rx="4" fill="#ffffff" stroke="#b7791f" stroke-width="1.3"/>
+<rect x="730" y="300" width="226" height="24" rx="4" fill="#b7791f"/>
+<text x="738" y="316" font-size="11.5" font-weight="700" fill="#ffffff">AgentResult</text>
+<text x="738" y="340" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">intent, path, results</text>
+<text x="738" y="354" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">logs, timings, stats</text>
+<text x="738" y="368" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">to_dict()</text>
+<rect x="730" y="430" width="226" height="72" rx="4" fill="#ffffff" stroke="#b7791f" stroke-width="1.3"/>
+<rect x="730" y="430" width="226" height="24" rx="4" fill="#b7791f"/>
+<text x="738" y="446" font-size="11.5" font-weight="700" fill="#ffffff">Engine</text>
+<text x="738" y="470" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">news_index, legal_index</text>
+<text x="738" y="484" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">graph, vectorizer, kmeans</text>
+<text x="738" y="498" font-size="9.5" font-family="JetBrains Mono, Consolas, monospace" fill="#3d4a58">query(...) -> AgentResult</text>
+<line x1="244" y1="200" x2="390" y2="110" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<text x="317" y="150" font-size="9.5" fill="#8a97a5" text-anchor="middle">composes</text>
+<line x1="244" y1="110" x2="390" y2="110" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<line x1="244" y1="320" x2="390" y2="350" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<text x="317" y="330" font-size="9.5" fill="#8a97a5" text-anchor="middle">used by</text>
+<line x1="505" y1="160" x2="505" y2="186" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<line x1="505" y1="240" x2="505" y2="290" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<line x1="620" y1="330" x2="730" y2="330" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<text x="675" y="325" font-size="9.5" fill="#8a97a5" text-anchor="middle">owns</text>
+<line x1="620" y1="440" x2="730" y2="470" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<line x1="620" y1="570" x2="730" y2="500" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+<line x1="843" y1="350" x2="843" y2="430" stroke="#5d6b7a" stroke-width="1.1" marker-end="url(#arrow)"/>
+</svg>

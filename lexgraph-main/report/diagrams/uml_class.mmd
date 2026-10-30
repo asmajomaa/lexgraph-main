@@ -1,0 +1,118 @@
+classDiagram
+    class HashSetTable {
+        -List _buckets
+        -int _capacity
+        -int _size
+        +int collisions
+        +int chain_collisions
+        +int probes
+        +put(key, value) bool
+        +get(key, default) Any
+        +contains(key) bool
+        +delete(key) bool
+        +keys() Iterator
+        +load_factor float
+    }
+
+    class PostingsTable {
+        +add_posting(term, doc_id, freq)
+        +get_postings(term) list
+        +document_frequency(term) int
+    }
+
+    class MinHeap {
+        -List _data
+        +push(item)
+        +pop() RankedItem
+        +peek() RankedItem
+    }
+
+    class TopKHeap {
+        +int k
+        +push(score, doc_id) bool
+        +get_top_k() list
+    }
+
+    class CitationGraph {
+        -HashSetTable _out
+        -HashSetTable _in
+        +add_node(node)
+        +add_edge(source, target, type)
+        +neighbors(node, direction, edge_type) list
+        +bfs_traverse(start, depth, type, direction) list
+        +shortest_path(a, b) list
+        +connected_component_size(node) int
+    }
+
+    class SparseVector {
+        +int dimension
+        +List indices
+        +List values
+        +dot(other) float
+        +cosine(other) float
+        +add(other) SparseVector
+        +scale(factor) SparseVector
+        +squared_distance(other) float
+    }
+
+    class InvertedIndex {
+        +PostingsTable postings
+        +List doc_lengths
+        +Tokenizer tokenizer
+        +N int
+        +average_document_length float
+        +add_document(doc)
+        +restrict(candidates) RestrictedView
+    }
+
+    class BM25 {
+        +float k1
+        +float b
+        +idf(df, N) float
+        +search(query, k) list
+        +score_document(query, doc_id) float
+        +explain(query, doc_id) list
+    }
+
+    class TFIDFVectorizer {
+        +int vocab_size
+        +Dict vocabulary
+        +List idf
+        +fit(documents) TFIDFVectorizer
+        +transform_text(text) SparseVector
+    }
+
+    class KMeans {
+        +int k
+        +List centroids
+        +List labels
+        +float inertia
+        +fit(vectors) KMeans
+        +predict(vector) int
+        +predict_top_n(vector, n) list
+    }
+
+    class ReActAgent {
+        +InvertedIndex news_index
+        +CitationGraph graph
+        +KMeans kmeans
+        +reason(query, mode) tuple
+        +act(query, intent, mode, k, probe, depth) tuple
+        +observe(path, payload, k) list
+        +run(query, mode, k, probe_clusters, bfs_depth) AgentResult
+    }
+
+    HashSetTable <|-- PostingsTable
+    MinHeap <-- TopKHeap
+    InvertedIndex *-- PostingsTable
+    InvertedIndex *-- Tokenizer
+    CitationGraph *-- HashSetTable
+    BM25 --> InvertedIndex
+    BM25 ..> TopKHeap
+    TFIDFVectorizer ..> SparseVector
+    KMeans --> SparseVector
+    ReActAgent --> InvertedIndex
+    ReActAgent --> CitationGraph
+    ReActAgent --> KMeans
+    ReActAgent --> TFIDFVectorizer
+    ReActAgent --> BM25

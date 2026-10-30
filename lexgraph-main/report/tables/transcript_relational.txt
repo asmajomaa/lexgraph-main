@@ -1,0 +1,30 @@
+[AGENT][REASON] intent=RELATIONAL: relational keyword(s) ['cite'] -> citation-graph path
+[AGENT][ACT] relational: resolving case reference from the query -> 06_584 (Antipova v Minister for Immigration & Multicultural & Indigenous Affai)
+[AGENT][ACT] relational: seed case 06_584 (resolution=query), BFS depth=2, edge_type=any, direction=both
+[AGENT][OBSERVE] BFS reached 194 case(s) within depth 2 in 16.67 ms; graph has 3890 nodes / 3077 edges
+[AGENT][OBSERVE] returning 5 connected case(s) including the seed
+[AGENT][ANSWER] Starting from 'Antipova v Minister for Immigration & Multicultural & Indigenous Affairs [2006] FCA 584 (19 May 2006)' (06_584), a breadth-first walk of the citation graph reached 4 connected case(s) within the depth limit (edge types: cited); 4 of them are directly connected to the seed (depth 1). Results are ordered by hop distance.
+
+==============================================================================
+QUERY   which cases cite 06_584
+PATH    intent=RELATIONAL  path=relational  mode=baseline  total=27.61 ms
+STATS   candidates_scored=194 / 3890 (5.0%)  clusters_probed=0
+------------------------------------------------------------------------------
+  1.       - depth=0  06_584
+     Antipova v Minister for Immigration & Multicultural & Indigenous Affairs [2006] FCA 584 (19 May 
+     The nature and history of the proceeding 1 This proceeding involved a detailed examination of the way in which the Migration Review Tribunal
+  2.       - depth=1 [cited]  06_1082
+     SZDGV v Minister for Immigration and Multicultural Affairs [2006] FCA 1082 (22 August 2006)
+     1 This is an appeal against a judgment of Barnes FM of 6 April 2006 dismissing an application for judicial review of a decision of the Refug
+  3.       - depth=1 [cited]  06_1140
+     SZCNP v Minister for Immigration and Multicultural Affairs [2006] FCA 1140 (29 August 2006)
+     This is an appeal from a decision of Federal Magistrate Smith dismissing an application for review of a decision of the Refugee Review Tribu
+  4.       - depth=1 [cited]  06_1229
+     Tran v Minister for Immigration & Multicultural Affairs [2006] FCA 1229 (12 September 2006)
+     1 In this appeal from the Federal Magistrates Court the central issue is whether the Migration Review Tribunal committed a jurisdictional er
+  5.       - depth=1 [cited]  06_1244
+     SZEXF v Minister for Immigration and Multicultural and Indigenous Affairs [2006] FCA 1244 (18 Se
+     Context to the case presented on behalf of the appellants by way of appeal from the Federal Magistrates Court This is an appeal from the jud
+------------------------------------------------------------------------------
+ANSWER  Starting from 'Antipova v Minister for Immigration & Multicultural & Indigenous Affairs [2006] FCA 584 (19 May 2006)' (06_584), a breadth-first walk of the citation graph reached 4 connected case(s) within the depth limit (edge types: cited); 4 of them are directly connected to the seed (depth 1). Results are ordered by hop distance.
+==============================================================================

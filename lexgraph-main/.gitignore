@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Built artefacts
+cache/
+*.pkl
+
+# Datasets: large, and the loaders fetch/generate them.
+#   data/raw/20news-bydate-{train,test}/   ~90 MB, 20 Newsgroups (Mitchell 1997)
+#   data/raw/corpus/                       Legal Case Reports (Galgani 2010)
+#   data/raw/*.zip, *.tar.gz               the archives they came from
+# `python main.py --build` works from data/synthetic.py when these are absent.
+data/raw/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

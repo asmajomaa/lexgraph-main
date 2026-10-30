@@ -1,0 +1,9 @@
+C:\Users\benhm\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\feature_extraction\text.py:517: UserWarning: The parameter 'token_pattern' will not be used since 'tokenizer' is not None'
+  warnings.warn(
+[compare] hash: custom insert 1751.7 ms vs dict build 14.7 ms; lookup 424.5 ms vs 30.1 ms; peak 13825 vs 7681 KiB
+[compare] heap: custom 67.12 ms vs heapq 16.11 ms
+[compare] bm25 vs rank_bm25: custom 1.376 ms/query vs 11.663 ms/query; top-10 overlap 99.6%
+[compare] bm25 vs sklearn tf-idf+cosine: custom 1.376 ms/query vs 28.915 ms/query; top-10 overlap 65.2%
+[compare] kmeans: custom 10816 ms (inertia 3789.9, NMI 0.3458) vs sklearn 12804 ms (inertia 3780.1, NMI 0.3539)
+[compare] bfs: custom 15.207 ms cold / 12.482 ms warm vs networkx 1.043 ms (both reach 1759 nodes)
+[compare_existing] summary keys: ['bfs', 'bm25', 'hash', 'heap', 'kmeans']

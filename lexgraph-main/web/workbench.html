@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEXGRAPH-RAG workbench</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* ---------------------------------------------------------------------------
+   Tokens. Light values live on bare :root; both dark blocks redefine the same
+   names so an explicit theme choice wins in either direction.
+   Palette is the user-supplied one, extended with two semantic hues for
+   pass/fail and a neutral ramp for the data views.
+--------------------------------------------------------------------------- */
+:root{
+  --bg:#eef1f4; --panel:#fff; --ink:#1b2430; --muted:#5d6b7a; --line:#d5dbe2;
+  --rel:#4b4acf; --bas:#0f6b6b; --ml:#b7791f; --logbg:#17202b; --logink:#d7e0ea;
+  --ok:#1d7a4c; --bad:#b4342a; --warn:#b7791f;
+  --subtle:#f6f8fa; --track:#e3e8ee;
+  --font:"Inter","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151b; --panel:#18202a; --ink:#e6ebf0; --muted:#93a1b0; --line:#2b3643;
+    --rel:#8f8eff; --bas:#3fb5b5; --ml:#e0a545; --logbg:#0b0f14; --logink:#c9d4df;
+    --ok:#4fbf8b; --bad:#e8705f; --warn:#e0a545;
+    --subtle:#141b23; --track:#232e3a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151b; --panel:#18202a; --ink:#e6ebf0; --muted:#93a1b0; --line:#2b3643;
+  --rel:#8f8eff; --bas:#3fb5b5; --ml:#e0a545; --logbg:#0b0f14; --logink:#c9d4df;
+  --ok:#4fbf8b; --bad:#e8705f; --warn:#e0a545;
+  --subtle:#141b23; --track:#232e3a;
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  line-height:1.5;font-size:15px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 60px;
+}
+main{max-width:1180px;margin:0 auto}
+
+/* ---------- header + tabs ---------- */
+header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-block:28px 14px}
+h1{font-size:1.5rem;margin:0;font-weight:700;letter-spacing:-.015em}
+.sub{color:var(--muted);font-size:.92rem;max-width:58ch}
+.badge{font-size:.78rem;padding:2px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.badge.demo{border-color:var(--ml);color:var(--ml)}
+.badge.live{border-color:var(--bas);color:var(--bas)}
+.badge.off{border-color:var(--bad);color:var(--bad)}
+
+nav.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:20px;overflow-x:auto;scrollbar-width:thin}
+nav.tabs button{
+  font:inherit;font-weight:500;background:none;border:0;border-bottom:2px solid transparent;
+  color:var(--muted);padding:10px 16px;cursor:pointer;white-space:nowrap;margin-bottom:-1px;
+}
+nav.tabs button:hover{color:var(--ink)}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+nav.tabs button .count{font-size:.78rem;color:var(--muted);margin-left:6px;font-variant-numeric:tabular-nums}
+
+.view[hidden]{display:none}
+
+/* ---------- shared surfaces ---------- */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+.card h2{font-size:1.02rem;margin:0 0 4px;font-weight:600}
+.card h2 + .lede{margin:0 0 14px}
+.lede{color:var(--muted);font-size:.88rem;max-width:74ch}
+.stack{display:grid;gap:16px}
+.grid-2{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.grid-2 > *{min-width:0}
+
+/* ---------- search form (user-supplied design) ---------- */
+form{display:grid;gap:14px}
+.qrow{display:flex;gap:10px}
+input[type=text]{flex:1;font:inherit;padding:11px 14px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);min-width:0}
+button,select{font:inherit}
+.run{padding:0 22px;border:0;border-radius:6px;background:var(--ink);color:var(--panel);font-weight:600;cursor:pointer}
+.run:disabled{opacity:.5;cursor:wait}
+:focus-visible{outline:2px solid var(--rel);outline-offset:2px}
+.opts{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink);padding:7px 14px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--panel)}
+label.s{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.9rem}
+select{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.ex{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;padding:3px 12px;font-size:.86rem;cursor:pointer}
+.chip:hover{color:var(--ink);border-color:var(--ink)}
+
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.path{border:1px solid var(--line);border-left:5px solid var(--c);border-radius:6px;padding:10px 14px;background:var(--panel);opacity:.55;transition:opacity .15s}
+.path.on{opacity:1;box-shadow:inset 0 0 0 1px var(--c)}
+.path b{display:block;color:var(--c);font-size:.95rem}
+.path span{font-size:.85rem;color:var(--muted)}
+
+#out{display:grid;gap:16px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{padding:10px 14px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.stat strong{display:block;font-size:1.35rem;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat span{font-size:.82rem;color:var(--muted)}
+.runs{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
+.runs > *{min-width:0}
+.run-h{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;gap:10px;flex-wrap:wrap}
+.run-h h2{font-size:1.02rem;margin:0;color:var(--c);font-weight:600}
+.meta{font-size:.84rem;color:var(--muted);font-variant-numeric:tabular-nums}
+ol.res{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ol.res li{border:1px solid var(--line);border-radius:6px;padding:9px 12px;display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start}
+.rk{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.85rem}
+.id{font-family:var(--mono);font-size:.82rem;word-break:break-all}
+.ti{font-size:.9rem}
+.sn{font-size:.84rem;color:var(--muted)}
+.sc{font-variant-numeric:tabular-nums;font-weight:600;color:var(--c)}
+.tag{font-size:.75rem;border:1px solid var(--line);border-radius:4px;padding:0 6px;color:var(--muted);margin-left:6px;white-space:nowrap}
+.log{background:var(--logbg);color:var(--logink);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:.8rem;overflow-x:auto;line-height:1.55}
+.log div{white-space:pre-wrap;padding:1px 0}
+.t-REASON{color:#e0a545}.t-ACT{color:#5fd0d0}.t-OBSERVE{color:#8f8eff}.t-ANSWER{color:#7fd88f}
+.msg{padding:14px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
+.err{border-color:var(--bad);color:var(--bad)}
+
+/* ---------- tests view ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.tile{padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.tile strong{display:block;font-size:1.7rem;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.15}
+.tile span{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tile.ok strong{color:var(--ok)} .tile.bad strong{color:var(--bad)}
+.modlist{display:grid;gap:8px;margin-top:4px}
+.modrow{display:grid;grid-template-columns:150px 1fr 62px;gap:12px;align-items:center;font-size:.86rem}
+.modrow .name{font-family:var(--mono);font-size:.8rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{height:8px;background:var(--track);border-radius:99px;overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.bar i.pass{background:var(--ok)} .bar i.fail{background:var(--bad)}
+.modrow .num{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;font-size:.8rem}
+.testlist{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;max-height:420px;overflow:auto;display:grid;gap:2px}
+.testrow{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:4px 2px;font-size:.82rem;border-radius:4px}
+.testrow:hover{background:var(--subtle)}
+.testrow .st{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.02em}
+.testrow.pass .st{color:var(--ok)} .testrow.fail .st{color:var(--bad)} .testrow.skip .st{color:var(--muted)}
+.testrow .tid{font-family:var(--mono);font-size:.78rem;color:var(--muted);word-break:break-all}
+
+/* ---------- complexity view ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.86rem;background:var(--panel)}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;background:var(--subtle);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.mono,th.mono{font-family:var(--mono);font-size:.8rem;white-space:nowrap}
+td.why{color:var(--muted);min-width:26ch;font-size:.82rem}
+.scalechart{width:100%;height:auto;display:block}
+.axis{stroke:var(--line);stroke-width:1}
+.ticklabel{fill:var(--muted);font-size:10px;font-family:var(--mono)}
+.seriesline{fill:none;stroke-width:2}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+
+/* ---------- results view ---------- */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;align-items:start}
+.figs > *{min-width:0}
+figure{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column}
+figure img{display:block;width:100%;height:auto;background:var(--panel)}
+figure figcaption{padding:9px 12px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);margin-top:auto}
+.filelist{display:grid;gap:6px}
+.filelist a{color:var(--ink);font-family:var(--mono);font-size:.8rem;text-decoration:none;display:flex;justify-content:space-between;gap:12px;padding:6px 10px;border:1px solid var(--line);border-radius:5px}
+.filelist a:hover{border-color:var(--muted);background:var(--subtle)}
+.filelist a span{color:var(--muted);font-size:.76rem;white-space:nowrap}
+
+.skeleton{height:12px;border-radius:6px;background:var(--track);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+@media (max-width:720px){
+  .paths{grid-template-columns:1fr}
+  .runs{grid-template-columns:1fr}
+  .qrow{flex-direction:column}
+  .run{padding:11px}
+  .modrow{grid-template-columns:110px 1fr 54px}
+  .card{padding:14px}
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>LEXGRAPH-RAG workbench</h1>
+    <span class="sub">Ask a question, watch the agent choose a path, and inspect the measured results behind every claim.</span>
+    <span id="badge" class="badge">connecting</span>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Workbench sections">
+    <button role="tab" id="tab-search" aria-controls="view-search" aria-selected="true" data-view="search">Search</button>
+    <button role="tab" id="tab-tests" aria-controls="view-tests" aria-selected="false" data-view="tests">Tests<span class="count" data-count="tests"></span></button>
+    <button role="tab" id="tab-complexity" aria-controls="view-complexity" aria-selected="false" data-view="complexity">Complexity</button>
+    <button role="tab" id="tab-results" aria-controls="view-results" aria-selected="false" data-view="results">Results</button>
+  </nav>
+
+  <!-- ============================ SEARCH ============================ -->
+  <section class="view" id="view-search" role="tabpanel" aria-labelledby="tab-search">
+    <form id="f" class="card">
+      <div class="qrow">
+        <input id="q" type="text" placeholder="Search the newsgroups, or ask which cases cite a ruling" aria-label="Query" autofocus>
+        <button class="run" id="go" type="submit">Run query</button>
+      </div>
+      <div class="opts">
+        <div class="seg" role="group" aria-label="Search mode">
+          <button type="button" data-m="baseline" aria-pressed="true">Baseline</button>
+          <button type="button" data-m="ml" aria-pressed="false">ML-accelerated</button>
+          <button type="button" data-m="compare" aria-pressed="false">Compare both</button>
+        </div>
+        <label class="s">Results <select id="k"><option>5</option><option selected>10</option><option>20</option></select></label>
+        <label class="s" id="pw">Clusters probed <select id="probe"><option>1</option><option selected>2</option><option>3</option></select></label>
+      </div>
+      <div class="ex" id="ex"></div>
+    </form>
+
+    <div class="paths" id="paths">
+      <div class="path" data-p="rel" style="--c:var(--rel)"><b>Relational</b><span>BFS over the legal citation graph</span></div>
+      <div class="path" data-p="baseline" style="--c:var(--bas)"><b>Lexical baseline</b><span>BM25 over the full corpus</span></div>
+      <div class="path" data-p="ml" style="--c:var(--ml)"><b>Lexical, ML-accelerated</b><span>K-Means pruning, then BM25</span></div>
+    </div>
+
+    <div id="out"><div class="msg">Run a query to see ranked results, the agent's reasoning log, and timings.</div></div>
+  </section>
+
+  <!-- ============================ TESTS ============================ -->
+  <section class="view" id="view-tests" role="tabpanel" aria-labelledby="tab-tests" hidden>
+    <div class="stack">
+      <div class="tiles" id="test-tiles"></div>
+      <div class="card">
+        <h2>Coverage by module</h2>
+        <p class="lede">Every structure and algorithm has its own suite. A green bar means every test in that module passed.</p>
+        <div class="modlist" id="test-mods"><div class="skeleton"></div></div>
+      </div>
+      <div class="card">
+        <h2>Test results</h2>
+        <p class="lede" id="test-meta">Loading the last run.</p>
+        <div class="testlist" id="test-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== COMPLEXITY ========================== -->
+  <section class="view" id="view-complexity" role="tabpanel" aria-labelledby="tab-complexity" hidden>
+    <div class="stack">
+      <div class="grid-2">
+        <div class="card">
+          <h2>What the corpus looks like</h2>
+          <p class="lede" id="corpus-lede">Loading index statistics.</p>
+          <div class="tiles" id="corpus-tiles"></div>
+        </div>
+        <div class="card">
+          <h2>Query time vs corpus size</h2>
+          <p class="lede">Measured, log scale. The indexed line grows far slower than the scan.</p>
+          <svg class="scalechart" id="scalechart" viewBox="0 0 440 220" role="img" aria-label="Query time against corpus size"></svg>
+          <div class="legend">
+            <span><i style="background:var(--rel)"></i>custom index + BM25</span>
+            <span><i style="background:var(--bad)"></i>naive linear scan</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Operation costs</h2>
+        <p class="lede">Every public entry point, its measured behaviour, and why that size follows from the data structure.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Operation</th><th>Structure</th><th class="mono">Time</th><th class="mono">Space</th><th>Why</th></tr></thead>
+            <tbody id="ops-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Measured highlights</h2>
+        <p class="lede">Numbers copied from the last benchmark run, not estimated.</p>
+        <div class="tiles" id="measured-tiles"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== RESULTS =========================== -->
+  <section class="view" id="view-results" role="tabpanel" aria-labelledby="tab-results" hidden>
+    <div class="stack">
+      <div class="card">
+        <h2>Figures</h2>
+        <p class="lede">Generated by <code>python -m benchmarks.run_all</code>. Each one is drawn from the run that produced the report's numbers.</p>
+        <div class="figs" id="figure-grid"><div class="skeleton"></div></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h2>Tables</h2>
+          <p class="lede">CSV and Markdown, as cited in the report.</p>
+          <div class="filelist" id="table-list"></div>
+        </div>
+        <div class="card">
+          <h2>Diagrams</h2>
+          <p class="lede">Architecture and UML, from <code>report/diagrams/</code>.</p>
+          <div class="filelist" id="diagram-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const EXAMPLES = [
+  'hockey playoffs goalie',
+  'orbital launch window nasa',
+  'which cases cite 06_584',
+  'opengl texture mapping'
+];
+let mode = 'baseline';
+
+/* ---------- tabs ---------- */
+const VIEWS = ['search', 'tests', 'complexity', 'results'];
+const LOADERS = { tests: loadTests, complexity: loadComplexity, results: loadResults };
+const loaded = {};
+
+function showView(name) {
+  if (!VIEWS.includes(name)) name = 'search';
+  VIEWS.forEach(view => {
+    $('#view-' + view).hidden = view !== name;
+    const tab = $('#tab-' + view);
+    tab.setAttribute('aria-selected', String(view === name));
+  });
+  if (LOADERS[name] && !loaded[name]) {
+    loaded[name] = true;
+    LOADERS[name]();
+  }
+  if (location.hash.slice(1) !== name) history.replaceState(null, '', '#' + name);
+}
+
+$$('nav.tabs button').forEach(tab => tab.addEventListener('click', () => showView(tab.dataset.view)));
+window.addEventListener('hashchange', () => showView(location.hash.slice(1)));
+
+/* ---------- search view ---------- */
+$('#ex').innerHTML = EXAMPLES.map(e => `<button type="button" class="chip">${esc(e)}</button>`).join('');
+$('#ex').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')) { $('#q').value = e.target.textContent; $('#q').focus(); }
+});
+$$('.seg button').forEach(b => b.addEventListener('click', () => {
+  mode = b.dataset.m;
+  $$('.seg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  $('#pw').style.visibility = mode === 'baseline' ? 'hidden' : 'visible';
+}));
+$('#pw').style.visibility = 'hidden';
+
+fetch('/api/info').then(r => r.json()).then(info => {
+  const badge = $('#badge');
+  if (info.error) throw new Error(info.error);
+  badge.textContent = info.demo ? 'demo data' : `live engine · ${info.news.documents.toLocaleString()} docs`;
+  badge.className = 'badge ' + (info.demo ? 'demo' : 'live');
+  window.__info = info;
+}).catch(() => {
+  const badge = $('#badge');
+  badge.textContent = 'server not reachable';
+  badge.className = 'badge off';
+});
+
+async function post(body) {
+  const r = await fetch('/api/query', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+  const j = await r.json();
+  if (!r.ok || j.error) throw new Error(j.error || r.statusText);
+  return j;
+}
+const isRel = run => String(run.intent || '').toUpperCase() === 'RELATIONAL';
+const ms = run => Number(run.total_ms ?? run.timings?.total_ms ?? 0);
+const ids = run => (run.results || []).map(r => r.doc_id ?? r.id);
+const light = kind => $$('.path').forEach(p => p.classList.toggle('on', p.dataset.p === kind));
+
+function renderRun(run, kind, title) {
+  const color = {rel: 'var(--rel)', baseline: 'var(--bas)', ml: 'var(--ml)'}[kind];
+  const st = run.stats || {};
+  const share = st.corpus_size ? ` · ${(100 * st.candidates_scored / st.corpus_size).toFixed(1)}% of corpus scored` : '';
+  const items = (run.results || []).map((r, i) => {
+    const id = r.doc_id ?? r.id;
+    const extra = (r.depth != null ? `<span class="tag">depth ${esc(r.depth)}</span>` : '') +
+                  (r.edge_type ? `<span class="tag">${esc(r.edge_type)}</span>` : '');
+    return `<li><span class="rk">${i + 1}</span><div><div class="id">${esc(r.external_id ?? id)}${extra}</div>` +
+      (r.title || r.subject ? `<div class="ti">${esc(r.title ?? r.subject)}</div>` : '') +
+      (r.snippet ? `<div class="sn">${esc(r.snippet)}</div>` : '') + `</div>` +
+      `<span class="sc">${r.score == null ? '' : Number(r.score).toFixed(3)}</span></li>`;
+  }).join('') || '<li><div class="sn">No results found.</div></li>';
+  return `<section class="card" style="--c:${color}"><div class="run-h"><h2>${esc(title)}</h2>` +
+    `<span class="meta">${ms(run).toFixed(2)} ms · ${esc(st.candidates_scored ?? '?')} scored${share}</span></div>` +
+    `<ol class="res">${items}</ol></section>`;
+}
+
+function renderLog(runs) {
+  const lines = runs.flatMap(r => r.logs || []);
+  if (!lines.length) return '';
+  return '<div class="log" aria-label="Agent log">' + lines.map(l => {
+    const m = l.match(/^\[AGENT\]\[(\w+)\]/);
+    return `<div>${m ? `<span class="t-${m[1]}">${esc(m[0])}</span>${esc(l.slice(m[0].length))}` : esc(l)}</div>`;
+  }).join('') + '</div>';
+}
+
+$('#f').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('#q').value.trim();
+  if (!q) { $('#out').innerHTML = '<div class="msg err">Enter a query to run.</div>'; return; }
+  const base = {query: q, k: +$('#k').value, probe_clusters: +$('#probe').value};
+  $('#go').disabled = true;
+  $('#out').innerHTML = '<div class="msg">Running…</div>';
+  try {
+    let html = '', runs = [];
+    if (mode === 'compare') {
+      const a = await post({...base, mode: 'baseline'});   // sequential, so timings don't compete
+      runs.push(a);
+      if (isRel(a)) {
+        light('rel');
+        html = `<div class="runs">${renderRun(a, 'rel', 'Citation graph traversal')}</div>`;
+      } else {
+        const b = await post({...base, mode: 'ml'}); runs.push(b);
+        light('baseline');
+        const A = new Set(ids(a)), overlap = ids(b).filter(x => A.has(x)).length;
+        const speed = ms(b) > 0 ? ms(a) / ms(b) : 0;
+        html = `<div class="cmp">` +
+          `<div class="stat"><strong>${speed.toFixed(1)}×</strong><span>baseline / ML path time</span></div>` +
+          `<div class="stat"><strong>${overlap} of ${ids(a).length}</strong><span>baseline results also found by ML</span></div>` +
+          `<div class="stat"><strong>${esc(b.stats?.candidate_pool ?? '?')}</strong><span>documents in the probed clusters (baseline scores ${esc(a.stats?.candidates_scored ?? '?')})</span></div></div>` +
+          `<div class="runs">${renderRun(a, 'baseline', 'Baseline')}${renderRun(b, 'ml', 'ML-accelerated')}</div>`;
+        $$('.path').forEach(p => p.classList.toggle('on', p.dataset.p !== 'rel'));
+      }
+    } else {
+      const r = await post({...base, mode}); runs.push(r);
+      const kind = isRel(r) ? 'rel' : mode; light(kind);
+      const title = kind === 'rel' ? 'Citation graph traversal' : kind === 'ml' ? 'ML-accelerated' : 'Baseline';
+      html = `<div class="runs">${renderRun(r, kind, title)}</div>`;
+    }
+    $('#out').innerHTML = html + renderLog(runs);
+  } catch (err) {
+    $('#out').innerHTML = `<div class="msg err">${esc(err.message)}</div>`;
+  } finally {
+    $('#go').disabled = false;
+  }
+});
+
+/* ---------- tests view ---------- */
+const STATUS_CLASS = {PASSED: 'pass', FAILED: 'fail', ERROR: 'fail', SKIPPED: 'skip', XFAIL: 'skip', XPASS: 'pass'};
+
+async function loadTests() {
+  let data;
+  try {
+    const r = await fetch('/api/tests');
+    data = await r.json();
+  } catch (err) {
+    $('#test-meta').textContent = 'Could not reach the server: ' + err.message;
+    return;
+  }
+  if (!data.available) {
+    $('#test-tiles').innerHTML = `<div class="msg" style="grid-column:1/-1">${esc(data.hint || 'No test results yet.')}</div>`;
+    $('#test-mods').innerHTML = '';
+    $('#test-meta').textContent = 'Run the suite, then reload this tab.';
+    return;
+  }
+  const empty = (data.total || 0) === 0;
+  $('#test-tiles').innerHTML = [
+    ['ok', data.passed, 'passed'],
+    [data.failed ? 'bad' : 'ok', data.failed, 'failed'],
+    ['', data.total, 'total tests'],
+    ['', data.duration_s.toFixed(2) + 's', 'wall time']
+  ].map(([cls, value, label]) =>
+    `<div class="tile ${cls}"><strong>${esc(value)}</strong><span>${esc(label)}</span></div>`).join('');
+  $$('[data-count="tests"]').forEach(el => { el.textContent = empty ? '' : data.total; });
+
+  const modules = Object.entries(data.modules || {}).sort((a, b) =>
+    (b[1].passed + b[1].failed) - (a[1].passed + a[1].failed));
+  $('#test-mods').innerHTML = modules.map(([name, counts]) => {
+    const total = counts.passed + counts.failed + counts.skipped || 1;
+    const pw = 100 * counts.passed / total, fw = 100 * counts.failed / total;
+    return `<div class="modrow">
+      <span class="name" title="${esc(name)}">${esc(name)}</span>
+      <span class="bar"><i class="pass" style="width:${pw}%"></i><i class="fail" style="width:${fw}%"></i></span>
+      <span class="num">${counts.passed}/${total}</span>
+    </div>`;
+  }).join('') || '<div class="msg">No per-module data.</div>';
+
+  $('#test-meta').textContent =
+    `Collected ${data.collected_at} · pytest exit code ${data.exit_code} · ${data.total} tests in ${data.duration_s}s`;
+  $('#test-list').innerHTML = (data.tests || []).map(t => {
+    const cls = STATUS_CLASS[t.status] || 'skip';
+    return `<div class="testrow ${cls}"><span class="st">${esc(t.status)}</span><span class="tid">${esc(t.file)}::${esc(t.name)}</span></div>`;
+  }).join('') || '<div class="msg">No individual test rows.</div>';
+}
+
+/* ---------- complexity view ---------- */
+function svgScale(value, min, max, size) {
+  if (max <= min) return size / 2;
+  return size - (Math.log10(value) - Math.log10(min)) / (Math.log10(max) - Math.log10(min)) * size;
+}
+
+function renderScaleChart(measured) {
+  const svg = $('#scalechart');
+  const sizes = measured?.sizes || [];
+  const custom = measured?.custom_mean_ms || [];
+  const naive = measured?.naive_mean_ms || [];
+  if (sizes.length < 2) {
+    svg.innerHTML = `<text x="10" y="24" class="ticklabel">Run ` +
+      `<tspan font-family="monospace">python -m benchmarks.run_all --only scalability</tspan>` +
+      ` to plot measured timings.</text>`;
+    return;
+  }
+  const W = 440, H = 220, L = 46, R = 34, T = 12, B = 34;
+  const plotW = W - L - R, plotH = H - T - B;
+  const all = custom.concat(naive).filter(v => v > 0);
+  const lo = Math.min(...all) * 0.7, hi = Math.max(...all) * 1.4;
+  const x = i => L + (sizes.length === 1 ? plotW / 2 : plotW * i / (sizes.length - 1));
+  const y = v => T + svgScale(v, lo, hi, plotH);
+  const path = series => series.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  const decades = [0.1, 1, 10, 100, 1000, 10000].filter(v => v >= lo && v <= hi);
+  const grid = decades.map(v =>
+    `<line class="axis" x1="${L}" y1="${y(v).toFixed(1)}" x2="${W - R}" y2="${y(v).toFixed(1)}"/>` +
+    `<text class="ticklabel" x="${L - 6}" y="${(y(v) + 3).toFixed(1)}" text-anchor="end">${v >= 1000 ? (v / 1000) + 'k' : v}</text>`).join('');
+  const ticks = sizes.map((s, i) =>
+    `<text class="ticklabel" x="${x(i).toFixed(1)}" y="${H - 14}" text-anchor="${i === sizes.length - 1 ? 'end' : 'middle'}">${s >= 1000 ? (s / 1000).toFixed(s >= 10000 ? 1 : 0) + 'k' : s}</text>`).join('');
+  svg.innerHTML = grid + ticks +
+    `<path class="seriesline" stroke="var(--bad)" d="${path(naive)}"/>` +
+    `<path class="seriesline" stroke="var(--rel)" d="${path(custom)}"/>` +
+    custom.map((v, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="3" fill="var(--rel)"/>`).join('') +
+    naive.map((v, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="3" fill="var(--bad)"/>`).join('') +
+    `<text class="ticklabel" x="${L + plotW / 2}" y="${H - 2}" text-anchor="middle">documents</text>`;
+}
+
+async function loadComplexity() {
+  let data;
+  try {
+    const r = await fetch('/api/complexity');
+    data = await r.json();
+  } catch (err) {
+    $('#ops-body').innerHTML = `<tr><td colspan="5" class="why">Could not reach the server: ${esc(err.message)}</td></tr>`;
+    return;
+  }
+  const corpus = data.corpus || {};
+  $('#corpus-lede').textContent =
+    `${Number(corpus.documents).toLocaleString()} documents, ${Number(corpus.vocabulary).toLocaleString()} distinct terms, ` +
+    `${Number(corpus.total_tokens).toLocaleString()} indexed tokens, mean length ${corpus.avgdl} tokens.`;
+  $('#corpus-tiles').innerHTML = [
+    [Number(corpus.documents).toLocaleString(), 'documents'],
+    [Number(corpus.vocabulary).toLocaleString(), 'vocabulary'],
+    [Number(corpus.total_tokens).toLocaleString(), 'tokens'],
+    [corpus.avgdl, 'mean length']
+  ].map(([v, l]) => `<div class="tile"><strong>${esc(v)}</strong><span>${esc(l)}</span></div>`).join('');
+
+  $('#ops-body').innerHTML = (data.operations || []).map(op =>
+    `<tr><td class="mono">${esc(op.name)}</td><td>${esc(op.structure)}</td>` +
+    `<td class="mono">${esc(op.time)}</td><td class="mono">${esc(op.space)}</td>` +
+    `<td class="why">${esc(op.why)}</td></tr>`).join('');
+
+  const measured = data.measured || {};
+  renderScaleChart(measured.scalability);
+  const graph = measured.graph || {};
+  const ml = measured.baseline_vs_ml || {};
+  const km = measured.kmeans || {};
+  const probeStats = ml.probe || {};
+  const bestProbe = Object.keys(probeStats).sort((a, b) => probeStats[b].speedup - probeStats[a].speedup)[0];
+  const tiles = [];
+  if (graph.nodes) tiles.push([graph.nodes.toLocaleString(), 'legal cases'], [graph.edges.toLocaleString(), 'citation edges']);
+  if (km.metrics) {
+    tiles.push([Number(km.metrics.purity).toFixed(3), 'cluster purity']);
+    tiles.push([Number(km.metrics.nmi).toFixed(3), 'NMI vs labels']);
+  }
+  if (bestProbe) {
+    tiles.push([Number(probeStats[bestProbe].speedup).toFixed(2) + '×', `ML speedup (probe ${bestProbe})`]);
+    tiles.push([(100 * Number(probeStats[bestProbe].recall)).toFixed(0) + '%', 'recall@10 at that probe']);
+  }
+  $('#measured-tiles').innerHTML = tiles.length
+    ? tiles.map(([v, l]) => `<div class="tile"><strong>${esc(v)}</strong><span>${esc(l)}</span></div>`).join('')
+    : '<div class="msg" style="grid-column:1/-1">No benchmark run recorded yet. Run `python -m benchmarks.run_all`.</div>';
+}
+
+/* ---------- results view ---------- */
+const FIGURE_CAPTIONS = {
+  'fig_1_query_time_vs_size.png': 'Query time against corpus size, custom index versus a naive scan.',
+  'fig_2_baseline_vs_ml.png': 'Speedup, recall and corpus share for the pruned path.',
+  'fig_3a_kmeans_inertia.png': 'K-Means inertia per iteration (log scale).',
+  'fig_3b_kmeans_scatter.png': 'PCA projection coloured by cluster and by true newsgroup.',
+  'fig_3c_kmeans_confusion.png': 'Cluster against true newsgroup, as a heatmap.',
+  'fig_4_bfs_scaling.png': 'BFS traversal time against V + E.'
+};
+
+function fileRow(entry) {
+  const size = entry.bytes >= 1024 ? (entry.bytes / 1024).toFixed(0) + ' kB' : entry.bytes + ' B';
+  return `<a href="${esc(entry.url)}" target="_blank" rel="noopener">${esc(entry.name)}<span>${size}</span></a>`;
+}
+
+async function loadResults() {
+  let data;
+  try {
+    const r = await fetch('/api/figures');
+    data = await r.json();
+  } catch (err) {
+    $('#figure-grid').innerHTML = `<div class="msg err">Could not reach the server: ${esc(err.message)}</div>`;
+    return;
+  }
+  const figures = data.figures || [];
+  $('#figure-grid').innerHTML = figures.length ? figures.map(f =>
+    `<figure><a href="${esc(f.url)}" target="_blank" rel="noopener"><img src="${esc(f.url)}" alt="${esc(FIGURE_CAPTIONS[f.name] || f.name)}" loading="lazy"></a>` +
+    `<figcaption>${esc(FIGURE_CAPTIONS[f.name] || f.name)}</figcaption></figure>`).join('')
+    : '<div class="msg" style="grid-column:1/-1">No figures yet. Run `python -m benchmarks.run_all`.</div>';
+  $('#table-list').innerHTML = (data.tables || []).map(fileRow).join('') ||
+    '<div class="msg">No tables yet.</div>';
+  $('#diagram-list').innerHTML = (data.diagrams || []).map(fileRow).join('') ||
+    '<div class="msg">No diagrams yet. Run `python -m report.build_diagrams`.</div>';
+}
+
+/* ---------- boot ---------- */
+showView(location.hash.slice(1) || 'search');
+</script>
+</body>
+</html>

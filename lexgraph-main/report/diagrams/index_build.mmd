@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant C as CLI / API
+    participant E as engine.py
+    participant L as loaders
+    participant I as InvertedIndex
+    participant V as TFIDFVectorizer
+    participant K as KMeans
+
+    C->>E: build_engine()
+    E->>L: load_newsgroups() + load_legal_cases()
+    L-->>E: 18,719 docs, 3,890 cases, 3,077 edges
+    E->>I: build(news) [tokenise, hash put]
+    I-->>E: 112,184 terms
+    E->>I: build(legal)
+    I-->>E: 94,187 terms
+    E->>V: fit(news)
+    V-->>E: 5,000-term vocabulary
+    E->>V: transform(news)
+    V-->>E: 18,719 sparse unit vectors
+    E->>K: fit(vectors)
+    K-->>E: 20 centroids, labels, inertia
+    E-->>C: Engine (pickled to cache/engine.pkl)

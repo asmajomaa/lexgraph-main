@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lexgraph-rag"
+version = "1.0.0"
+description = "Hybrid agentic information-retrieval engine over 20 Newsgroups and Legal Case Reports"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.black]
+# PEP 8's "maximum line length" is 79, but section 3.3 of PEP 8 also permits a
+# team to raise it to 99 provided the agreement is written down. 99 is what this
+# project uses: it fits a full typed signature or a two-level nested call on one
+# line, which is most of the engine, and every module in `structures/`, `core/`
+# and `ml/` is within it (max 99, measured). tests/test_style.py enforces it.
+line-length = 99
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 99
+target-version = "py310"
+
+[tool.ruff.lint]
+# E501 is the line-length rule; enabling it makes `ruff check` agree with the
+# test suite rather than silently accepting long lines.
+select = ["E", "F", "W"]
+ignore = ["E203"]  # slice spacing, which ruff's own formatter disagrees with
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

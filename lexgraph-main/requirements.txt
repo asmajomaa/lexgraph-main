@@ -1,0 +1,19 @@
+# Benchmark and test dependencies only.
+#
+# The engine itself (structures/, core/, ml/, engine.py, main.py, web/) imports
+# NOTHING outside the Python standard library.  These packages exist so the
+# comparisons in benchmarks/compare_existing.py and the figures in
+# benchmarks/ can run, and so pytest can execute the suite.
+#
+# Install:  python -m pip install -r requirements.txt
+# Minimum:  Python 3.10
+
+numpy==2.2.6            # PCA projection in benchmarks/bench_kmeans.py only
+matplotlib==3.10.9      # every figure under report/figures/
+scikit-learn==1.6.1     # K-Means and TF-IDF reference points in the comparison
+rank-bm25==0.2.2        # BM25 reference (top-10 agreement check)
+networkx==3.4.2         # BFS reference
+pytest==9.0.2           # the test suite (232 tests)
+
+# Optional, for the UI verification harness only (web/screenshot.py):
+# playwright==1.48.0    # then: python -m playwright install chromium

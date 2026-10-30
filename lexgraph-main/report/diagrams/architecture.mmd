@@ -1,0 +1,76 @@
+graph TB
+    subgraph Client
+        CLI["main.py CLI"]
+        WEB["workbench (browser)"]
+        API["web/server.py JSON API"]
+    end
+
+    subgraph Agent["ReActAgent: Reason -> Act -> Observe"]
+        R["REASON<br/>word-level keyword match"]
+        A["ACT<br/>dispatch on (intent, mode)"]
+        O["OBSERVE / ANSWER<br/>rows + stats + logs"]
+    end
+
+    subgraph Paths
+        P1["Path 1 RELATIONAL<br/>BFS over citation graph"]
+        P2["Path 2 LEXICAL baseline<br/>BM25 over full corpus"]
+        P3["Path 3 LEXICAL ml<br/>cluster prune, then BM25"]
+    end
+
+    subgraph Structures
+        HT["HashSetTable<br/>polynomial hash, chains"]
+        PT["PostingsTable<br/>term -> [(doc_id, tf)]"]
+        HK["TopKHeap<br/>bounded min-heap"]
+        G["CitationGraph<br/>out + in adjacency"]
+        SV["SparseVector<br/>sorted parallel arrays"]
+    end
+
+    subgraph Core
+        IDX["InvertedIndex<br/>doc_lengths, avgdl, N"]
+        BM["BM25<br/>k1=1.5, b=0.75"]
+        TK["Tokenizer<br/>+ light Porter"]
+        VEC["TFIDFVectorizer<br/>top-M by df, L2"]
+        KM["KMeans<br/>k-means++, dense centroids"]
+        EV["metrics<br/>purity, NMI, ARI"]
+    end
+
+    subgraph Data
+        NG["20 Newsgroups<br/>18,719 docs"]
+        LC["Legal Case Reports<br/>3,890 cases"]
+    end
+
+    CLI --> Agent
+    WEB --> API
+    API --> Agent
+    Agent --> R
+    R --> A
+    A --> P1
+    A --> P2
+    A --> P3
+    P1 --> O
+    P2 --> O
+    P3 --> O
+    O --> CLI
+    O --> API
+
+    P1 --> G
+    P2 --> BM
+    P3 --> KM
+    P3 --> BM
+    P1 --> IDX
+    P2 --> IDX
+    BM --> IDX
+    IDX --> PT
+    IDX --> TK
+    PT --> HT
+    BM --> HK
+    G --> HT
+    G --> HK
+    KM --> SV
+    KM --> VEC
+    VEC --> SV
+    VEC --> TK
+    EV --> KM
+    IDX --> NG
+    G --> LC
+    P1 --> LC

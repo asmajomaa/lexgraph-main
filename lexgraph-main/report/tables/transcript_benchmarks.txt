@@ -1,0 +1,46 @@
+C:\Users\benhm\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\feature_extraction\text.py:517: UserWarning: The parameter 'token_pattern' will not be used since 'tokenizer' is not None'
+  warnings.warn(
+
+=== [graph] graph structure + BFS scaling ===
+[bench_graph] real graph: V=3890 E=3077 avg_degree=0.791
+[bench_graph] seed 06_584: d0=1 | d1=100 | d2=194 | d3=308
+[bench_graph] seed 06_1352: d0=1 | d1=44 | d2=133 | d3=261
+[bench_graph] seed 07_511: d0=1 | d1=42 | d2=119 | d3=238
+[bench_graph] seed 07_1318: d0=1 | d1=24 | d2=51 | d3=208
+[bench_graph] seed 06_1401: d0=1 | d1=21 | d2=87 | d3=187
+[bench_graph] synthetic V=   100 E=   246  bfs=   0.781 ms
+[bench_graph] synthetic V=   500 E=  1264  bfs=   5.252 ms
+[bench_graph] synthetic V=  1000 E=  2504  bfs=   9.567 ms
+[bench_graph] synthetic V=  2000 E=  4995  bfs=  21.900 ms
+[bench_graph] synthetic V=  5000 E= 12534  bfs=  63.929 ms
+[bench_graph] synthetic V= 10000 E= 25087  bfs= 150.491 ms
+=== [graph] done in 6.8s ===
+
+=== [kmeans] K-Means quality + PCA ===
+[bench_kmeans] k=20 iters=60 (max_iter) inertia=17888.09 purity=0.3141 nmi=0.3078 ari=0.1081
+=== [kmeans] done in 234.6s ===
+
+=== [scalability] query time vs corpus size ===
+[bench_query_time] N=  1000  custom=   0.153 ms  naive=   266.775 ms  ratio= 1740.4x
+[bench_query_time] N=  2000  custom=   0.206 ms  naive=   469.320 ms  ratio= 2275.1x
+[bench_query_time] N=  5000  custom=   0.372 ms  naive=   991.054 ms  ratio= 2661.2x
+[bench_query_time] N= 10000  custom=   0.755 ms  naive=  2390.850 ms  ratio= 3168.1x
+[bench_query_time] N= 18719  custom=   1.446 ms  naive=  4648.113 ms  ratio= 3215.1x
+=== [scalability] done in 108.5s ===
+
+=== [query_time] baseline vs ML-accelerated ===
+[bench_query_time_ml] probe=1  baseline= 1.498 ms  ml= 1.011 ms  speedup= 1.48x  recall@10= 29.6%  pool=3856 (20.6% of corpus)
+[bench_query_time_ml] probe=2  baseline= 1.498 ms  ml= 1.114 ms  speedup= 1.34x  recall@10= 46.9%  pool=5874 (31.4% of corpus)
+[bench_query_time_ml] probe=3  baseline= 1.498 ms  ml= 1.222 ms  speedup= 1.23x  recall@10= 55.0%  pool=7102 (37.9% of corpus)
+=== [query_time] done in 7.9s ===
+
+=== [compare] comparison with existing libraries ===
+[compare] hash: custom insert 2037.1 ms vs dict build 14.0 ms; lookup 471.4 ms vs 30.9 ms; peak 13825 vs 7681 KiB
+[compare] heap: custom 66.77 ms vs heapq 16.13 ms
+[compare] bm25 vs rank_bm25: custom 1.344 ms/query vs 11.820 ms/query; top-10 overlap 99.6%
+[compare] bm25 vs sklearn tf-idf+cosine: custom 1.344 ms/query vs 36.102 ms/query; top-10 overlap 65.2%
+[compare] kmeans: custom 11651 ms (inertia 3789.9, NMI 0.3458) vs sklearn 13489 ms (inertia 3780.1, NMI 0.3539)
+[compare] bfs: custom 76.303 ms cold / 12.833 ms warm vs networkx 1.170 ms (both reach 1759 nodes)
+=== [compare] done in 96.9s ===
+
+summary -> C:\Users\benhm\Desktop\as\lexgraph_rag\report\tables\summary.json

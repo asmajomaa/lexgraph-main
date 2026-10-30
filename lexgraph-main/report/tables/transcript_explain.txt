@@ -1,0 +1,7 @@
+BM25 explanation  query='hockey playoffs goalie'  doc_id=3870
+  N=18719  dl=22  avgdl=101.4558  k1=1.5  b=0.75
+  score = sum idf(t) * tf*(k1+1) / (tf + k1*(1-b + b*dl/avgdl))
+  hockey             tf=1    idf=4.162308  contribution=6.427486
+  playoffs           tf=1    idf=4.965975  contribution=7.668518
+  goalie             tf=1    idf=5.839147  contribution=9.016882
+  total = 23.112887

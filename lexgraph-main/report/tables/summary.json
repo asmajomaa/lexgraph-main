@@ -1,0 +1,354 @@
+{
+  "graph": {
+    "nodes": 3890,
+    "edges": 3077,
+    "average_degree": 0.7910025706940874,
+    "isolated": 1526,
+    "edge_classes": [
+      [
+        "cited",
+        2224
+      ],
+      [
+        "referred to",
+        331
+      ],
+      [
+        "followed",
+        168
+      ],
+      [
+        "considered",
+        114
+      ],
+      [
+        "applied",
+        92
+      ],
+      [
+        "related",
+        50
+      ],
+      [
+        "discussed",
+        43
+      ],
+      [
+        "distinguished",
+        34
+      ],
+      [
+        "approved",
+        7
+      ],
+      [
+        "quoted",
+        6
+      ],
+      [
+        "notfollowed",
+        2
+      ],
+      [
+        "affirmed",
+        1
+      ],
+      [
+        "disapproved",
+        1
+      ],
+      [
+        "doubted",
+        1
+      ],
+      [
+        "explained",
+        1
+      ],
+      [
+        "noted",
+        1
+      ],
+      [
+        "referred",
+        1
+      ]
+    ],
+    "depth_profiles": [
+      [
+        "06_584",
+        "Antipova v Minister for Immigration & Multicultural & Indige",
+        0,
+        99,
+        "d0=1 | d1=100 | d2=194 | d3=308"
+      ],
+      [
+        "06_1352",
+        "Boston Commercial Services Pty Ltd v GE Capital Finance Aust",
+        3,
+        40,
+        "d0=1 | d1=44 | d2=133 | d3=261"
+      ],
+      [
+        "07_511",
+        "White Industries Aust Ltd v Commissioner of Taxation (includ",
+        8,
+        33,
+        "d0=1 | d1=42 | d2=119 | d3=238"
+      ],
+      [
+        "07_1318",
+        "Minister for Immigration and Citizenship v Le [2007] FCA 131",
+        4,
+        19,
+        "d0=1 | d1=24 | d2=51 | d3=208"
+      ],
+      [
+        "06_1401",
+        "Fortron Automotive Treatments Pty Ltd v Jones (No 2) [2006] ",
+        2,
+        18,
+        "d0=1 | d1=21 | d2=87 | d3=187"
+      ]
+    ],
+    "bfs_sizes": [
+      100,
+      500,
+      1000,
+      2000,
+      5000,
+      10000
+    ],
+    "bfs_edges": [
+      246,
+      1264,
+      2504,
+      4995,
+      12534,
+      25087
+    ],
+    "bfs_ms": [
+      0.6428199994843453,
+      4.003779997583479,
+      7.456939993426204,
+      17.42027999716811,
+      51.07659999630414,
+      111.41124000423588
+    ],
+    "figure": "C:\\Users\\benhm\\Desktop\\as\\lexgraph_rag\\report\\figures\\fig_4_bfs_scaling.png"
+  },
+  "timings": {
+    "graph": 5.85,
+    "kmeans": 234.6,
+    "scalability": 108.48,
+    "query_time": 7.88,
+    "compare": 89.44
+  },
+  "kmeans": {
+    "metrics": {
+      "purity": 0.31406592232491054,
+      "nmi": 0.3078057038315082,
+      "ari": 0.10809002796881052,
+      "n": 18719.0,
+      "n_true": 20.0,
+      "n_pred": 20.0,
+      "largest_cluster_fraction": 0.24290827501469095
+    },
+    "inertia_history": [
+      34335.35573334439,
+      18121.807582481684,
+      18026.318854828838,
+      17979.79551713281,
+      17955.397376302073,
+      17940.471036814335,
+      17925.943905983004,
+      17913.399475914375,
+      17905.637996604328,
+      17901.583994381206,
+      17899.353064935614,
+      17896.309883459453,
+      17891.64877976309,
+      17890.559685709955,
+      17890.361246245153,
+      17890.216900829488,
+      17890.098631185407,
+      17889.978503290793,
+      17889.897362958633,
+      17889.807219496306,
+      17889.746196864176,
+      17889.674098759642,
+      17889.587035078865,
+      17889.47785895594,
+      17889.411353663007,
+      17889.344468269108,
+      17889.285493101448,
+      17889.22954546383,
+      17889.19413440358,
+      17889.159335139513,
+      17889.11462815538,
+      17889.064047858177,
+      17889.006098726797,
+      17888.951171260906,
+      17888.89243705035,
+      17888.851581711195,
+      17888.81200504244,
+      17888.77355879248,
+      17888.740851367962,
+      17888.726594664597,
+      17888.7058001411,
+      17888.671140787996,
+      17888.6270110394,
+      17888.570945379204,
+      17888.52051911398,
+      17888.49235674088,
+      17888.461069872523,
+      17888.434658266677,
+      17888.392127426392,
+      17888.339458945287,
+      17888.292879823697,
+      17888.25395988856,
+      17888.220559728037,
+      17888.19387449827,
+      17888.180979650126,
+      17888.16649483037,
+      17888.146719070144,
+      17888.131401434206,
+      17888.112457216666,
+      17888.093583866183
+    ],
+    "iterations": 60,
+    "converged": "max_iter",
+    "inertia": 17888.093583866183,
+    "figures": [
+      "C:\\Users\\benhm\\Desktop\\as\\lexgraph_rag\\report\\figures\\fig_3a_kmeans_inertia.png",
+      "C:\\Users\\benhm\\Desktop\\as\\lexgraph_rag\\report\\figures\\fig_3b_kmeans_scatter.png",
+      "C:\\Users\\benhm\\Desktop\\as\\lexgraph_rag\\report\\figures\\fig_3c_kmeans_confusion.png"
+    ],
+    "pca_variance": [
+      0.006059272034324666,
+      0.0040689560550477245
+    ]
+  },
+  "scalability": {
+    "sizes": [
+      1000,
+      2000,
+      5000,
+      10000,
+      18719
+    ],
+    "custom_mean_ms": [
+      0.15327999950386584,
+      0.2062880015000701,
+      0.37241199985146517,
+      0.7546720013488084,
+      1.4457000000402334
+    ],
+    "naive_mean_ms": [
+      266.7753599991556,
+      469.3203300004825,
+      991.0536999988835,
+      2390.850329998648,
+      4648.113430003286
+    ],
+    "figure": "C:\\Users\\benhm\\Desktop\\as\\lexgraph_rag\\report\\figures\\fig_1_query_time_vs_size.png",
+    "max_speedup": 3215.1299923040265
+  },
+  "query_time": {
+    "queries": 100,
+    "probe": {
+      "1": {
+        "baseline_ms": 1.4980347994132899,
+        "ml_ms": 1.0114041998749599,
+        "speedup": 1.481143542412116,
+        "recall": 0.296,
+        "scored": 164.71,
+        "scored_fraction": 0.008799081147497195,
+        "pool": 3855.52,
+        "pool_fraction": 0.20596826753565894,
+        "baseline_scored": 1082.29
+      },
+      "2": {
+        "baseline_ms": 1.4980347994132899,
+        "ml_ms": 1.1144325996865518,
+        "speedup": 1.3442130101314615,
+        "recall": 0.46900000000000014,
+        "scored": 269.42,
+        "scored_fraction": 0.014392862866606123,
+        "pool": 5873.79,
+        "pool_fraction": 0.31378759549121216,
+        "baseline_scored": 1082.29
+      },
+      "3": {
+        "baseline_ms": 1.4980347994132899,
+        "ml_ms": 1.2221793999779038,
+        "speedup": 1.2257077802492606,
+        "recall": 0.55,
+        "scored": 380.52,
+        "scored_fraction": 0.0203280089748384,
+        "pool": 7102.49,
+        "pool_fraction": 0.3794267856188899,
+        "baseline_scored": 1082.29
+      }
+    },
+    "figure": "C:\\Users\\benhm\\Desktop\\as\\lexgraph_rag\\report\\figures\\fig_2_baseline_vs_ml.png"
+  },
+  "compare": {
+    "hash": {
+      "n": 150000,
+      "insert_ms": 1850.6500999889493,
+      "dict_build_ms": 13.564666665236777,
+      "lookup_ms": 433.0100999989857,
+      "dict_lookup_ms": 31.513900011001773,
+      "peak_kib": 13824.8125,
+      "dict_peak_kib": 7680.6875,
+      "collisions": 94238,
+      "chain_collisions": 35863,
+      "load_factor": 0.57220458984375
+    },
+    "heap": {
+      "n": 200000,
+      "k": 10,
+      "custom_ms": 66.9561333488673,
+      "heapq_ms": 16.161133341180783,
+      "same_result": true
+    },
+    "bm25": {
+      "custom_ms_per_query": 1.3459800003329292,
+      "rank_bm25": {
+        "index_build_ms": 570.1091999944765,
+        "query_ms": 11.812558000092395,
+        "overlap_at_k": 0.996
+      },
+      "sklearn_tfidf": {
+        "fit_ms": 5136.638500000117,
+        "query_ms": 27.80983600008767,
+        "overlap_at_k": 0.652
+      }
+    },
+    "kmeans": {
+      "sample": 4000,
+      "custom_ms": 11310.72259999928,
+      "custom_inertia": 3789.90641607992,
+      "custom_nmi": 0.34575234064802624,
+      "sklearn": {
+        "ms": 13333.512500015786,
+        "inertia": 3780.126618358544,
+        "nmi": 0.3538840011400357
+      }
+    },
+    "bfs": {
+      "seed": "06_584",
+      "custom_ms": 12.038139993092045,
+      "custom_std_ms": 0.2780367215273413,
+      "first_call_ms": 26.487000024644658,
+      "networkx": {
+        "ms": 1.0229600011371076,
+        "std_ms": 0.35258935898084465,
+        "reached": 1759
+      },
+      "custom_reached": 1759
+    },
+    "figure": "C:\\Users\\benhm\\Desktop\\as\\lexgraph_rag\\report\\figures\\fig_5_comparison.png"
+  }
+}

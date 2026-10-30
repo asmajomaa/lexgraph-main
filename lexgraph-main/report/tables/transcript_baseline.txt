@@ -1,0 +1,29 @@
+[AGENT][REASON] intent=LEXICAL: no relational keyword (mode=baseline) -> lexical path
+[AGENT][ACT] lexical/baseline: BM25 over all 18719 documents
+[AGENT][OBSERVE] scored 475 documents (2.5%) in 1.25 ms
+[AGENT][OBSERVE] returning 5 ranked document(s)
+[AGENT][ANSWER] 5 document(s) matched 'hockey playoffs goalie'. The strongest is "Where's Roger?" (BM25 23.113) from the rec.sport.hockey category.
+
+==============================================================================
+QUERY   hockey playoffs goalie
+PATH    intent=LEXICAL  path=baseline  mode=baseline  total=1.39 ms
+STATS   candidates_scored=475 / 18719 (2.5%)  clusters_probed=0
+------------------------------------------------------------------------------
+  1.  23.113  20news-bydate-test/rec.sport.hockey/54000
+     Where's Roger?
+     I really feel the need for a knowledgable hockey observer to explain this year's playoffs to me. I mean, the obviously superior Toronto team
+  2.  16.049  20news-bydate-test/rec.sport.hockey/54041
+     Re: POTVIN and HIS STICK
+     Yes, he does. BUT, the goalie sure as hell doesn't want him there! When I played roller hockey (boy do I miss those days) as a goalie, I wou
+  3.  14.308  20news-bydate-train/rec.sport.hockey/53549
+     Re: Leaf slump over
+     Nice try Deepak, but "tough Whaler squad" should have clued you in to the fact that my Leaf woofing was tongue-in-cheek. If playoff hockey i
+  4.  14.126  20news-bydate-train/rec.sport.hockey/53828
+     Re: Schedule...
+     But only in NY,NJ, Philadelphia, and Chicago. Everywhere else, the only reason SportsChannel was available was for local baseball broadcasts
+  5.  13.895  20news-bydate-train/rec.sport.hockey/53682
+     Re: Individual Winners (WAS: Re: WHERE ARE THE DOUBTERS NOW? HMM?)
+     How about Kevin Hatcher? Scored roughly 35 goals, plays 30 minutes a game. That's really sad when two second-rate goalies (Barasso and Belfo
+------------------------------------------------------------------------------
+ANSWER  5 document(s) matched 'hockey playoffs goalie'. The strongest is "Where's Roger?" (BM25 23.113) from the rec.sport.hockey category.
+==============================================================================
